@@ -6,27 +6,22 @@
 
 ## Integrantes y Roles
 
-<!-- INSTRUCCIONES:
-  Primero agregar la imagen de avatar de github. Para ello, primero tienes que obtener el id de tu usuario de github.
-  Eso se hace de la siguiente manera:
-    1. Abre otra pesteña en el navegador
-    2. Es esa pestaña, copia la siguiente url -> https://api.github.com/users/<tu-nombre-de-usuario-github>. Esto es una peticion a la api de github, te enviara un json con tus datos publicos. Si tienes problemas visualizando el JSON descarga una extension del navegador llamado JSONView o uno parecido
-    3. Copia tu id
-    4. Luego, en la tabla de roles, busca tu nombre y sustitúyelo por lo siguiente:
-      + <img src="https://avatars.githubusercontent.com/u/<tu-id>?v=4" width=64><br />
-      + [<tu-nombre>](https://github.com/<tu-nombre-de-usuario-github>)<br />
-      + [Ver en LinkedIn](https://linkedin.com/<tu-url-de-linkedin>)
--->
-
 | Nombre | Redes | Rol Principal | Rol Secundario | 
 |:------:|:-----:|:-------------:|:--------------:|
 | <img src="https://avatars.githubusercontent.com/u/68699179?v=4" width=64> <br /> **Agustin Bravo** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/bravoagustin)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/agustin-bravo-64b015163/) | **Front-end** | | 
 | <img src="https://avatars.githubusercontent.com/u/103896095?v=4" width=64> <br /> **Anael Bolzan** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/Anael90)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/anaelbolzan/) | **QA** | | 
 | <img src="https://avatars.githubusercontent.com/u/115600193?v=4" width=64> <br /> **Carlos Barrera** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/devpcarlos)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/carlos-jesus-barrera-aleman-715538266/) | **Back-end** | |
 | <img src="https://avatars.githubusercontent.com/u/75347168?v=4" width=64> <br /> **Carlos Sabogal** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/Carlosabogal)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/carlos-david-sabogal-motta/) | **Back-end** | |
+| <img src="https://avatars.githubusercontent.com/u/98360590?v=4" width=64> <br /> **Diego Macia** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/thesrcielos)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/diegomaciad/) | **Back-end** | | 
 | <img src="https://avatars.githubusercontent.com/u/24779626?v=4" width=64> <br /> **Francisco Sepulveda** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/fsepulvedadev")</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/fsepulvedadev/) | **Fullstack** | |
+| <img src="https://avatars.githubusercontent.com/u/127709400?v=4" width=64> <br /> **Freddy Arreaga** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/FreddyArreagaM)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/fnam/) | **Front-end** | | 
 | <img src="https://avatars.githubusercontent.com/u/138414824?v=4" width=64> <br /> **Gerson Espinoza** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/Dranceer)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/gerson-es) | **Front-end** | | 
-| <img src="https://avatars.githubusercontent.com/u/127709400?v=4" width=64> <br /> **** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/FreddyArreagaM)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/fnam/) | **Front-end** | | 
+| <img src="https://avatars.githubusercontent.com/u/119600965?v=4" width=64> <br /> **Jeison Fonseca** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/Jjfonsecab)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/jeison-fonseca-2ab400258/) | **Back-end** | | 
+| <img src="https://avatars.githubusercontent.com/u/90539362?v=4" width=64> <br /> **José Fontalvo** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/FontalvoJ)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/fontalvoj/) | **Front-end** | | 
+| <img src="https://avatars.githubusercontent.com/u/83480830?v=4" width=64> <br /> **Néstor Albán** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/idabsito)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/nkalban/) | **Back-end** | | 
+| <img src="https://avatars.githubusercontent.com/u/66035820?v=4" width=64> <br /> **Marcos Corasaniti** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/marcosCora)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/marcoscorasaniti/) | **Front-end** | | 
+<!--|| <img src="https://avatars.githubusercontent.com/u/?v=4" width=64> <br /> **Leandro Fabeiro** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')]()</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/leandro-fabeiro-34b7482aa/) | **Back-end** | | 
+-->
 
 
 ## 🖥️ Stack
@@ -38,6 +33,7 @@
 | Framework Frontend | | |
 | Diseño UI/UX | | |
 | Host Frontend | | |
+
 ### Back-End ⚙️
 
 |Tipo de Tecnología|Nombre|Versión|
