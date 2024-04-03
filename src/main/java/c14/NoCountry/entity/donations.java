@@ -1,10 +1,9 @@
-package c14.NoCountry.entity;
+package c14.NoCountry.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
 
 @Entity
@@ -18,9 +17,9 @@ public class donations {
     public int id;
     @ManyToOne
     @JoinColumn(name = "post_id", referencedColumnName = "id")
-    public posts post_id;
+    private Post post;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    public users user_id;
+    public users users_id;
     public BigDecimal amount;
 }

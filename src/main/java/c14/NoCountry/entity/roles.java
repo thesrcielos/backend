@@ -1,12 +1,10 @@
-package c14.NoCountry.entity;
+package c14.NoCountry.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.springframework.boot.autoconfigure.web.WebProperties;
-
 @Entity
 @Table(name= "Roles")
 @AllArgsConstructor

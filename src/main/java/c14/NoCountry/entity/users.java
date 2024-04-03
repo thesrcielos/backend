@@ -1,29 +1,32 @@
-package c14.NoCountry.entity;
+package c14.NoCountry.Entity;
+
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name= "Users")
 @AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
 @Data
 public class users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int id;
-    public  String email;
-    public  String name;
-    public  String lastname;
-    public  String password;
-    public  String rrs_fb;
-    public  String rrs_ig;
-    public  String place;
-    public  String photo;
+    private int id;
+
+    private String email;
+    private String name;
+    private String lastname;
+    private String password;
+    private String rrs_fb;
+    private String rrs_ig;
+    private String place;
+    private byte[] photo;
+
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
-    public  roles role_id;
+    private roles role;
+
 }
