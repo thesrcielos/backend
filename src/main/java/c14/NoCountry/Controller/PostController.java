@@ -20,4 +20,9 @@ public class PostController {
         }
        return ResponseEntity.ok(pse.save(pss));
     }
+
+    @PostMapping("/all-post")
+    public ResponseEntity<?> getPost() {
+        return ResponseEntity.ok(pse.findByAll());
+    }
 }
