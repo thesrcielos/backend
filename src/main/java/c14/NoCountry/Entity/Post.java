@@ -2,6 +2,7 @@ package c14.NoCountry.Entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Entity
@@ -16,6 +17,7 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotBlank(message = "El comentario no puede estar vacio")
     private String data;
 
     @Lob

@@ -15,6 +15,9 @@ public class PostController {
 
     @PostMapping("/save-post")
     public ResponseEntity<?> savePost(Post pss){
+        if (pss==null){
+            return ResponseEntity.badRequest().body("No puede haber datos vacios");
+        }
        return ResponseEntity.ok(pse.save(pss));
     }
 }
