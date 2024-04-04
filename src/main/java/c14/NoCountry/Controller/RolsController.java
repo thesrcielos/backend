@@ -22,7 +22,7 @@ public class RolsController {
         return ResponseEntity.ok(this.rlss.save(rls));
     }
 
-    @GetMapping("/all-comment")
+    @GetMapping("/all-roles")
     public ResponseEntity<?> getComments() {
         return ResponseEntity.ok(rlss.findByAll());
     }
