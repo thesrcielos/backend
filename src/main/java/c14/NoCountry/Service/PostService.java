@@ -4,6 +4,7 @@ import c14.NoCountry.Repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import c14.NoCountry.Entity.post;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -19,6 +20,9 @@ public class PostService {
 
     public List<post> findByAll(){
        return ps.findAll();
+    }
 
+    public List<post>findbyName(String name){
+        return ps.findByName(name);
     }
 }
