@@ -2,6 +2,7 @@ package c14.NoCountry.Entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 
 @Entity
@@ -15,7 +16,7 @@ public class users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    @Email(message = "El correo electronico no es valido")
     private String email;
     private String name;
     private String lastname;
