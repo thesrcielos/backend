@@ -12,7 +12,7 @@ import lombok.*;
 @Data
 @Getter
 @Setter
-public class Post {
+public class post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -26,6 +26,5 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private users users;
-
 
 }

@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-import c14.NoCountry.Entity.Post;
+import c14.NoCountry.Entity.post;
 
 @RestController
 public class PostController {
@@ -15,7 +15,7 @@ public class PostController {
     private PostService pse;
 
     @PostMapping("/save-post")
-    public ResponseEntity<?> savePost(Post pss){
+    public ResponseEntity<?> savePost(post pss){
         if (pss==null){
             return ResponseEntity.badRequest().body("No puede haber datos vacios");
         }

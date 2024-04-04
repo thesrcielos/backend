@@ -17,7 +17,7 @@ public class donations {
     public int id;
     @ManyToOne
     @JoinColumn(name = "post_id", referencedColumnName = "id")
-    private Post post;
+    private c14.NoCountry.Entity.post post;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     public users users_id;

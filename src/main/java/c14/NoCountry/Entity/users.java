@@ -23,7 +23,7 @@ public class users {
     private String rrs_fb;
     private String rrs_ig;
     private String place;
-    private byte[] photo;
+    private String photo;
 
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
