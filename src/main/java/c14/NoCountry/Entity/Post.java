@@ -21,10 +21,10 @@ public class Post {
 
     @NotBlank(message = "El comentario no puede estar vacio")
     private String data;
-    @Lob
-    private byte[] image;
+    @NotBlank
+    private String image;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private users user;
+    private Users user;
 
 }

@@ -34,7 +34,6 @@ public class PostController {
 // si hay errores de validacion, se devuelven en una lista en una utilizando lo siguiente:
             return ResponseEntity.badRequest().body(errorMessages);
         }
-
        return ResponseEntity.ok(postService.save(post));
     }
 

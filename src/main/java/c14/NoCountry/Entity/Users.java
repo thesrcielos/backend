@@ -12,7 +12,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @Data
-public class users {
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -28,6 +28,6 @@ public class users {
 
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
-    private rols role;
+    private Rols role;
 
 }

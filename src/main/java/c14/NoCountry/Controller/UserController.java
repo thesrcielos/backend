@@ -1,6 +1,6 @@
 package c14.NoCountry.Controller;
 
-import c14.NoCountry.Entity.users;
+import c14.NoCountry.Entity.Users;
 import c14.NoCountry.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,13 +19,13 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public users registerUser(@RequestBody users user) {
+    public Users registerUser(@RequestBody Users user) {
 
         return userService.registerUser(user);
     }
 
     @PostMapping("/login")
-    public users loginUser(@RequestParam String username, @RequestParam String password) {
+    public Users loginUser(@RequestParam String username, @RequestParam String password) {
         return userService.loginUser(username, password);
     }
 }
