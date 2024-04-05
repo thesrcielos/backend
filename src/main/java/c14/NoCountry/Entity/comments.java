@@ -16,7 +16,7 @@ public class comments {
         public int id;
         @ManyToOne
         @JoinColumn(name = "post_id", referencedColumnName = "id")
-        public post post_id;
+        public Post post_id;
         @OneToOne
         @JoinColumn(name = "user_id", referencedColumnName = "id")
         public users user_id;
