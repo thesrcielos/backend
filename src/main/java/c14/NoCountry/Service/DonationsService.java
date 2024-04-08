@@ -11,7 +11,6 @@ import java.util.List;
 public class DonationsService {
     @Autowired
     DonationsRepository dr;
-
     public Donations save(Donations dnt){
         return dr.save(dnt);
     }
