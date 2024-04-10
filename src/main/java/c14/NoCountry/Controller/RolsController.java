@@ -1,7 +1,6 @@
 package c14.NoCountry.Controller;
 
-import c14.NoCountry.Entity.comments;
-import c14.NoCountry.Entity.rols;
+import c14.NoCountry.Entity.Rols;
 import c14.NoCountry.Service.RolsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,7 @@ public class RolsController {
     private RolsService rlss;
 
     @PostMapping("/save-rol")
-    public ResponseEntity<?> saveComment(rols rls){
+    public ResponseEntity<?> saveComment(Rols rls){
         if (rls==null){
             return ResponseEntity.badRequest().body("No puede haber datos vacios");
         }

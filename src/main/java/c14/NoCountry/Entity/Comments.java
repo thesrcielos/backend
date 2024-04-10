@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class comments {
+public class Comments {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         public int id;
@@ -19,6 +19,6 @@ public class comments {
         public Post post_id;
         @OneToOne
         @JoinColumn(name = "user_id", referencedColumnName = "id")
-        public users user_id;
+        public Users user_id;
         public String comment;
     }

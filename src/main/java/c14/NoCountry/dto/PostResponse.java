@@ -1,7 +1,7 @@
 package c14.NoCountry.dto;
 
 
-import c14.NoCountry.Entity.users;
+import c14.NoCountry.Entity.Users;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +15,6 @@ public class PostResponse {
     private Integer id;
     private String name;
     private String data;
-    private byte[] image;
-    private users user;
+    private String image;
+    private Users user;
 }

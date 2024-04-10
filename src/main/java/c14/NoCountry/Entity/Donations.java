@@ -11,15 +11,15 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class donations {
+public class Donations {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int id;
     @ManyToOne
     @JoinColumn(name = "post_id", referencedColumnName = "id")
-    private Post post;
+    private Post id_post;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    public users users_id;
+    public Users users_id;
     public BigDecimal amount;
 }
