@@ -32,7 +32,7 @@ public class PostService {
         return postRepository.searchProjectByData(searchTerm);
     }
 
-    public List<Post> searchProjectByPost(String searchTerm) {
+    public List<Post> searchProjectByData(String searchTerm) {
         return postRepository.searchProjectByData(searchTerm);
     }
 

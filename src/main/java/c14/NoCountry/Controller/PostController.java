@@ -64,7 +64,7 @@ public class PostController {
     }
     @GetMapping("/searchByData")
     public ResponseEntity<?> searchByData(@RequestParam("searchTerm") String searchTerm) {
-        List<Post> searchResult = postService.searchProjectByPost(searchTerm);
+        List<Post> searchResult = postService.searchProjectByData(searchTerm);
         return ResponseEntity.ok(searchResult);
     }
 }

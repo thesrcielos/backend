@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name= "Posts")
 @AllArgsConstructor
@@ -22,7 +24,11 @@ public class Post {
     @NotBlank(message = "El comentario no puede estar vacio")
     private String data;
     @NotBlank
-    private String image;
+    private String image;/*
+    @NotBlank
+    private BigDecimal recaudoEsperado;
+    @NotBlank
+    private BigDecimal recaudoActual;*/
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private Users user;

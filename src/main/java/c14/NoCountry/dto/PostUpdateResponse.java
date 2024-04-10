@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostResponse {
+public class PostUpdateResponse {
+    private Integer id;
     private String name;
     private String data;
     private String image;
-    private Users user;
 }

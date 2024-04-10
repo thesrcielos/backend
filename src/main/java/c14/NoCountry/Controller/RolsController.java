@@ -13,8 +13,9 @@ public class RolsController {
     @Autowired
     private RolsService rlss;
 
+
     @PostMapping("/save-rol")
-    public ResponseEntity<?> saveComment(Rols rls){
+    private ResponseEntity<?> saveComment(Rols rls){
         if (rls==null){
             return ResponseEntity.badRequest().body("No puede haber datos vacios");
         }
