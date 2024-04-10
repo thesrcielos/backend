@@ -18,4 +18,5 @@ public class PostMapper {
                 .user(post.getUser())
                 .build();
     }
+
 }
