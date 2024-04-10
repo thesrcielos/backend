@@ -1,0 +1,30 @@
+package c14.NoCountry.Entity;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name= "FollowingPosts", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id,post_id"}))
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Builder
+public class FollowingPosts {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private users user;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
+}
