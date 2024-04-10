@@ -21,7 +21,7 @@ public class FollowingPosts {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private users user;
+    private Users user;
 
     @NotNull
     @ManyToOne

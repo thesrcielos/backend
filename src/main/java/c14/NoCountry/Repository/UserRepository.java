@@ -9,5 +9,7 @@ import java.util.Arrays;
 @Repository
 public interface UserRepository extends JpaRepository<Users, Long> {
     Users findByEmail(String email);
-    void deleteById(Integer id);
+    boolean existsByEmail(String email);
+
+
 }
