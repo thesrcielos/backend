@@ -88,4 +88,24 @@ public class UserController {
         }
     }
 
+    @PutMapping("/updatePassword")
+    public ResponseEntity<String> updatePasswordByEmail(@RequestParam String email,@RequestParam String OldPassword,
+                                                        @RequestParam String newPassword,
+                                                        @RequestParam String confirmPassword) {
+        try {
+            boolean passwordUpdated = userService.updatePasswordByEmail(email,OldPassword, newPassword, confirmPassword);
+            if (passwordUpdated) {
+                return ResponseEntity.ok("¡La contraseña se ha actualizado correctamente!");
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("La contraseña no se pudo actualizar.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al actualizar la contraseña: " + e.getMessage());
+        }
+    }
+    @GetMapping("/searchByName")
+    public ResponseEntity<?> searchByEmail(@RequestParam("searchTerm") String searchTerm) {
+        List<Users> searchResult = userService.searchProjectByEmail(searchTerm);
+        return ResponseEntity.ok(searchResult);
+    }
 }

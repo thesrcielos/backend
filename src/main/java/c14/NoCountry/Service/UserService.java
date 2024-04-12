@@ -109,4 +109,7 @@ public class UserService {
         return encodedPassword.equals(password);
     }
 
+    public List<Users> searchProjectByEmail(String searchTerm) {
+        return userRepository.searchProjectByEmail(searchTerm);
+    }
 }
