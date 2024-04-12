@@ -1,7 +1,7 @@
 package c14.NoCountry.dto;
 
 
-import c14.NoCountry.Entity.Rols;
+import c14.NoCountry.Entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,5 +20,5 @@ public class UserUpdateResponse {
     private String rrs_ig;
     private String place;
     private String photo;
-    private Rols role;
+    private Role role;
 }

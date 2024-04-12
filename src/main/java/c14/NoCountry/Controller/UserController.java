@@ -4,11 +4,15 @@ import c14.NoCountry.Entity.Post;
 import c14.NoCountry.Entity.Users;
 import c14.NoCountry.Service.UserService;
 import c14.NoCountry.dto.LoginRequestDto;
+import c14.NoCountry.dto.UserAdminRegister;
+import c14.NoCountry.dto.UserCreatorRegister;
+import c14.NoCountry.dto.UserDonorRegister;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,37 +20,35 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    @PostMapping("/registerDonor")
+    public ResponseEntity<?> registerUserDonor(@RequestBody UserDonorRegister user) throws Exception {
+        return ResponseEntity.ok(userService.registerUserDonor(user));
     }
 
-    @PostMapping("/register")
-    public Users registerUser(@RequestBody Users user) throws Exception {
-
-        return userService.registerUser(user);
+    @PostMapping("/registerCreator")
+    public ResponseEntity<?> registerUserCreator(@RequestBody UserCreatorRegister user) throws Exception {
+        return ResponseEntity.ok(userService.registerUserCreator(user));
     }
+
+    @PostMapping("/registerAdmin")
+    public ResponseEntity<?> registerUserAdmin(@RequestBody UserAdminRegister user) throws Exception {
+        return ResponseEntity.ok(userService.registerUserAdmin(user));
+    }
+
 
     @PostMapping("/login")
-    public ResponseEntity<Object> loginUser(@RequestBody LoginRequestDto request) {
-        try {
-            Users user = userService.loginUser(request.getEmail(), request.getPassword());
-            if (user != null) {
-                return ResponseEntity.ok(user);
-            } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al iniciar sesión: " + e.getMessage());
-        }
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequestDto request) {
+        return ResponseEntity.ok(userService.login(request));
     }
 
 
-    @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("")
     public ResponseEntity<List<Users>> getAllUsers() {
         List<Users> userList = userService.getAllUsers();
         return new ResponseEntity<>(userList, HttpStatus.OK);
@@ -75,7 +77,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable("id") int id, @RequestBody Users user) {
+    public ResponseEntity<?> updateUser(@PathVariable("id") int id, @RequestBody Users user) throws Exception {
         Optional<Users> existingUser = userService.getUserById(id);
         if (existingUser.isPresent()) {
             user.setId(id); // asegurarse de que el ID coincida
@@ -86,19 +88,4 @@ public class UserController {
         }
     }
 
-    @PutMapping("/updatePassword")
-    public ResponseEntity<String> updatePasswordByEmail(@RequestParam String email,@RequestParam String OldPassword,
-                                                        @RequestParam String newPassword,
-                                                        @RequestParam String confirmPassword) {
-        try {
-            boolean passwordUpdated = userService.updatePasswordByEmail(email,OldPassword, newPassword, confirmPassword);
-            if (passwordUpdated) {
-                return ResponseEntity.ok("¡La contraseña se ha actualizado correctamente!");
-            } else {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("La contraseña no se pudo actualizar.");
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al actualizar la contraseña: " + e.getMessage());
-        }
-    }
 }
