@@ -1,7 +1,10 @@
 package c14.NoCountry.Service;
 
 import c14.NoCountry.*;
+<<<<<<< HEAD
 import c14.NoCountry.Entity.Post;
+=======
+>>>>>>> 3956438f74385c239b6560ed215e15c3b2e8e195
 import c14.NoCountry.Entity.Users;
 import c14.NoCountry.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -144,9 +147,12 @@ public class UserService {
 
         return true;
     }
+<<<<<<< HEAD
 
     public List<Users> searchProjectByEmail(String searchTerm) {
         return userRepository.searchProjectByEmail(searchTerm);
     }
+=======
+>>>>>>> 3956438f74385c239b6560ed215e15c3b2e8e195
 
 }

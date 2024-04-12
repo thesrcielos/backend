@@ -101,10 +101,13 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al actualizar la contraseña: " + e.getMessage());
         }
     }
+<<<<<<< HEAD
 
     @GetMapping("/searchByName")
     public ResponseEntity<?> searchByEmail(@RequestParam("searchTerm") String searchTerm) {
         List<Users> searchResult = userService.searchProjectByEmail(searchTerm);
         return ResponseEntity.ok(searchResult);
     }
+=======
+>>>>>>> 3956438f74385c239b6560ed215e15c3b2e8e195
 }
