@@ -13,11 +13,6 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<Users, Long> {
     Users findByEmail(String email);
     boolean existsByEmail(String email);
-<<<<<<< HEAD
     @Query(value = "SELECT * FROM users WHERE email LIKE %?1%", nativeQuery = true)
     List<Users> searchProjectByEmail(String searchTerm);
-=======
-
-
->>>>>>> 3956438f74385c239b6560ed215e15c3b2e8e195
 }
