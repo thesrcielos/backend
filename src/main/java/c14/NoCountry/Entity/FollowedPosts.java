@@ -8,12 +8,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name= "FollowingPosts", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id,post_id"}))
+@Table(name= "FollowedPosts", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id,post_id"}))
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class FollowingPosts {
+public class FollowedPosts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

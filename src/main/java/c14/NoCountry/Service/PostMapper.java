@@ -19,7 +19,7 @@ public class PostMapper {
                 .user(post.getUser())
                 .build();
     }
-<<<<<<< HEAD
+
     public PostUpdateResponse toPostUpdateResponse(Post post){
         if(post==null){
             throw new NullPointerException("Post cant be null");
@@ -31,7 +31,5 @@ public class PostMapper {
                 .image(post.getImage())
                 .build();
     }
-=======
 
->>>>>>> 31ff142a7e724789b28fc31a9f9844b3af9312e9
 }
