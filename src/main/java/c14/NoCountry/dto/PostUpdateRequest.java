@@ -1,7 +1,6 @@
 package c14.NoCountry.dto;
 
 
-import c14.NoCountry.Entity.Users;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostUpdateResponse {
+public class PostUpdateRequest {
     @NotBlank
     private Integer id;
     @NotBlank

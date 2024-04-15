@@ -1,9 +1,10 @@
 package c14.NoCountry.Controller;
 
 import c14.NoCountry.Service.PostService;
+import c14.NoCountry.dto.PostSavingRequest;
+import c14.NoCountry.dto.PostUpdateRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,7 +28,7 @@ public class PostController {
 
     @PreAuthorize("hasRole('CREATOR')")
     @PostMapping("/save-post")
-    public ResponseEntity<?> savePost(@Valid @RequestBody Post post, BindingResult result){
+    public ResponseEntity<?> savePost(@Valid @RequestBody PostSavingRequest post, BindingResult result){
 
         if (result.hasErrors()) {
             List<String> errorMessages = result.getAllErrors()
@@ -54,8 +55,8 @@ public class PostController {
 
     @PreAuthorize("hasRole('CREATOR')")
     @PutMapping("/updatePost")
-    public ResponseEntity<?> updatePost(@Valid @RequestBody Post post){
-        return ResponseEntity.ok(postService.save(post));
+    public ResponseEntity<?> updatePost(@Valid @RequestBody PostUpdateRequest post){
+        return ResponseEntity.ok(postService.update(post));
     }
 
     @PreAuthorize("hasAnyRole('CREATOR','ADMIN')")

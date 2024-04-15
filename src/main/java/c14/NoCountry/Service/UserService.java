@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.mail.MailException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -111,5 +113,14 @@ public class UserService {
 
     public List<Users> searchProjectByEmail(String searchTerm) {
         return userRepository.searchProjectByEmail(searchTerm);
+    }
+
+    public Users getUserFromSecurityContextHolder(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(!(authentication instanceof UsernamePasswordAuthenticationToken userToken)){
+            return null;
+        }
+        UserDetails userDetails = (UserDetails) userToken.getPrincipal();
+        return (Users) userDetails;
     }
 }

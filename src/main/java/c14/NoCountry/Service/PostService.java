@@ -1,7 +1,10 @@
 package c14.NoCountry.Service;
 
+import c14.NoCountry.Entity.Users;
 import c14.NoCountry.Repository.PostRepository;
 import c14.NoCountry.dto.PostResponse;
+import c14.NoCountry.dto.PostSavingRequest;
+import c14.NoCountry.dto.PostUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import c14.NoCountry.Entity.Post;
@@ -14,8 +17,12 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final PostMapper postMapper;
-    public Post save(Post post){
-        return postRepository.save(post);
+    private final UserService userService;
+    public PostResponse save(PostSavingRequest postRequest){
+        Post post = postMapper.postRequestToPost(postRequest);
+        Users user = userService.getUserFromSecurityContextHolder();
+        post.setUser(user);
+        return postMapper.toPostResponse(postRepository.save(post));
     }
 
     public void delete(Integer id){
@@ -36,4 +43,8 @@ public class PostService {
         return postRepository.searchProjectByData(searchTerm);
     }
 
+    public PostResponse update(PostUpdateRequest postRequest) {
+        Post post = postMapper.postUpdateToPost(postRequest);
+        return postMapper.toPostResponse(postRepository.save(post));
+    }
 }

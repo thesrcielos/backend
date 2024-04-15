@@ -14,12 +14,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostResponse {
-    @NotBlank
+    private Integer id;
     private String name;
-    @NotBlank
     private String data;
-    @NotBlank
     private String image;
-    @NotNull
-    private Users user;
+    private Integer user_id;
 }
