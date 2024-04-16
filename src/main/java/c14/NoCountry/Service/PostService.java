@@ -43,7 +43,8 @@ public class PostService {
         return postRepository.searchProjectByData(searchTerm);
     }
 
-    public PostResponse update(PostUpdateRequest postRequest) {
+    public PostResponse update(PostUpdateRequest postRequest) throws Exception {
+        Users user = userService.getUserById(postRequest.getUser_id()).orElseThrow(()->new Exception("usuario no existe"));
         Post post = postMapper.postUpdateToPost(postRequest);
         return postMapper.toPostResponse(postRepository.save(post));
     }
