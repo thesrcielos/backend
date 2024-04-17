@@ -20,4 +20,6 @@ public class PostUpdateRequest {
     private String data;
     @NotBlank
     private String image;
+    @NotBlank
+    private Integer user_id;
 }

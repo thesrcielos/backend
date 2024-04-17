@@ -3,10 +3,8 @@ package c14.NoCountry.Controller;
 import c14.NoCountry.Entity.Post;
 import c14.NoCountry.Entity.Users;
 import c14.NoCountry.Service.UserService;
-import c14.NoCountry.dto.LoginRequestDto;
-import c14.NoCountry.dto.UserAdminRegister;
-import c14.NoCountry.dto.UserCreatorRegister;
-import c14.NoCountry.dto.UserDonorRegister;
+import c14.NoCountry.dto.*;
+import c14.NoCountry.exception.UserException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,43 +48,34 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("")
-    public ResponseEntity<List<Users>> getAllUsers() {
-        List<Users> userList = userService.getAllUsers();
+    public ResponseEntity<?> getAllUsers() {
+        List<UserResponse> userList = userService.getAllUsers();
         return new ResponseEntity<>(userList, HttpStatus.OK);
     }
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getUserById(@PathVariable("id") int id) {
-        Optional<Users> user = userService.getUserById(id);
-        if (user.isPresent()) {
-            return new ResponseEntity<>(user.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Usuario no encontrado", HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<?> getUserById(@PathVariable("id") int id) throws UserException {
+        UserResponse user = userService.getUserById(id);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteUserById(@PathVariable("id") int id) {
-        Optional<Users> user = userService.getUserById(id);
-        if (user.isPresent()) {
-            userService.deleteUserById(id);
-            return new ResponseEntity<>("Usuario eliminado correctamente", HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>("Usuario no encontrado", HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<?> deleteUserById(@PathVariable("id") int id) throws UserException {
+        UserResponse user = userService.getUserById(id);
+        userService.deleteUserById(id);
+        return new ResponseEntity<>("Usuario eliminado correctamente", HttpStatus.NO_CONTENT);
+
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(@PathVariable("id") int id, @RequestBody Users user) throws Exception {
-        Optional<Users> existingUser = userService.getUserById(id);
-        if (existingUser.isPresent()) {
-            user.setId(id); // asegurarse de que el ID coincida
-            userService.updateUser(user);
-            return new ResponseEntity<>("Usuario actualizado correctamente", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Usuario no encontrado", HttpStatus.NOT_FOUND);
-        }
+        UserResponse existingUser = userService.getUserById(id);
+        user.setId(id); // asegurarse de que el ID coincida
+        userService.updateUser(user);
+        return new ResponseEntity<>("Usuario actualizado correctamente", HttpStatus.OK);
+
     }
 
     @PutMapping("/updatePassword")
@@ -106,7 +95,7 @@ public class UserController {
     }
     @GetMapping("/searchByEmail")
     public ResponseEntity<?> searchByEmail(@RequestParam("searchTerm") String searchTerm) {
-        List<Users> searchResult = userService.searchProjectByEmail(searchTerm);
+        List<UserResponse> searchResult = userService.searchProjectByEmail(searchTerm);
         return ResponseEntity.ok(searchResult);
     }
 }

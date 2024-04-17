@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Repository
-public interface UserRepository extends JpaRepository<Users, Long> {
+public interface UserRepository extends JpaRepository<Users, Integer> {
     Users findByEmail(String email);
     boolean existsByEmail(String email);
     @Query(value = "SELECT * FROM users WHERE email LIKE %?1%", nativeQuery = true)

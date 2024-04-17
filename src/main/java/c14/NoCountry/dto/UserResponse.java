@@ -16,24 +16,13 @@ import org.hibernate.validator.constraints.Length;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserResponse {
-    @NotBlank
-    @Email
+    private Integer id;
     private String email;
-    @NotBlank
     private String name;
-    @NotBlank
     private String lastname;
-    @NotBlank
-    @Length(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
-    private String password;
-    @NotBlank
     private String rrs_fb;
-    @NotBlank
     private String rrs_ig;
-    @NotBlank
     private String place;
-    @NotBlank
     private String photo;
-    @NotNull
     private Role role;
 }

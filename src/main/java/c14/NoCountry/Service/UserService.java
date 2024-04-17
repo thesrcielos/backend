@@ -3,12 +3,11 @@ package c14.NoCountry.Service;
 import c14.NoCountry.Entity.Role;
 import c14.NoCountry.Entity.Users;
 import c14.NoCountry.Repository.UserRepository;
-import c14.NoCountry.dto.LoginRequestDto;
-import c14.NoCountry.dto.UserAdminRegister;
-import c14.NoCountry.dto.UserCreatorRegister;
-import c14.NoCountry.dto.UserDonorRegister;
+import c14.NoCountry.dto.*;
+import c14.NoCountry.exception.UserException;
 import c14.NoCountry.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
+import org.antlr.v4.runtime.Token;
 import org.springframework.mail.MailException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,59 +29,63 @@ public class UserService {
     private final EmailService emailService;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-    public String registerUserDonor(UserDonorRegister userDonor) throws Exception {
+    public TokenResponse registerUserDonor(UserDonorRegister userDonor) throws UserException{
         if (userRepository.existsByEmail(userDonor.getEmail())) {
-            throw new Exception("El correo electrónico ya está registrado");
+            throw new UserException(UserException.REGISTERED_EMAIL);
         }
         Users user = userMapper.userDonorToUser(userDonor);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Users savedUser = userRepository.save(user);
         sendEmailRegistration(savedUser.getEmail());
-        return jwtService.getToken(savedUser);
+        return TokenResponse.builder().token(jwtService.getToken(savedUser)).build();
     }
 
     public void sendEmailRegistration(String email){
         emailService.sendEmail(email, "Registro Completo", "Registro Realizado Correctamente, Bienvenido");
     }
-    public String registerUserCreator(UserCreatorRegister userCreator) throws Exception {
+    public TokenResponse registerUserCreator(UserCreatorRegister userCreator) throws UserException {
         if (userRepository.existsByEmail(userCreator.getEmail())) {
-            throw new Exception("El correo electrónico ya está registrado");
+            throw new UserException(UserException.REGISTERED_EMAIL);
         }
         Users user = userMapper.userCreatorToUser(userCreator);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Users savedUser = userRepository.save(user);
         sendEmailRegistration(savedUser.getEmail());
-        return jwtService.getToken(user);
+        return TokenResponse.builder().token(jwtService.getToken(user)).build();
     }
-    public String registerUserAdmin(UserAdminRegister userAdmin) throws Exception {
+    public TokenResponse registerUserAdmin(UserAdminRegister userAdmin) throws Exception {
         if (userRepository.existsByEmail(userAdmin.getEmail())) {
-            throw new Exception("El correo electrónico ya está registrado");
+            throw new UserException(UserException.REGISTERED_EMAIL);
         }
         Users user = userMapper.userAdminToUser(userAdmin);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Users savedUser = userRepository.save(user);
         sendEmailRegistration(savedUser.getEmail());
-        return jwtService.getToken(savedUser);
+        return TokenResponse.builder().token(jwtService.getToken(savedUser)).build();
     }
-    public String login(LoginRequestDto loginRequestDto){
+    public TokenResponse login(LoginRequestDto loginRequestDto){
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequestDto.getEmail(),loginRequestDto.getPassword()));
         UserDetails user = userRepository.findByEmail(loginRequestDto.getEmail());
-        return jwtService.getToken(user);
+        return TokenResponse.builder().token(jwtService.getToken(user)).build();
     }
-    public List<Users> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserResponse> getAllUsers() {
+        return userRepository.findAll().stream().map(userMapper::toUserResponse).toList();
     }
 
-    public Optional<Users> getUserById(int id) {
-        return userRepository.findById((long) id);
+    public UserResponse getUserById(int id) throws UserException {
+        Optional<Users> user = userRepository.findById(id);
+        if(user.isEmpty()){
+            throw new UserException(UserException.USER_NOT_FOUND);
+        }
+        return userMapper.toUserResponse(user.get());
     }
 
     public void deleteUserById(int id) {
-        userRepository.deleteById((long) id);
+        userRepository.deleteById(id);
     }
 
     public void updateUser(Users user) throws Exception {
-        Users existingUser = userRepository.findById((long) user.getId()).orElseThrow(()-> new Exception("User not found"));
+        Users existingUser = userRepository.findById(user.getId()).orElseThrow(()-> new UserException(UserException.USER_NOT_FOUND));
         if (!existingUser.getPassword().equals(user.getPassword())) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
@@ -111,8 +114,9 @@ public class UserService {
         return encodedPassword.equals(password);
     }
 
-    public List<Users> searchProjectByEmail(String searchTerm) {
-        return userRepository.searchProjectByEmail(searchTerm);
+    public List<UserResponse> searchProjectByEmail(String searchTerm) {
+        return userRepository.searchProjectByEmail(searchTerm).stream()
+                .map(userMapper::toUserResponse).toList();
     }
 
     public Users getUserFromSecurityContextHolder(){

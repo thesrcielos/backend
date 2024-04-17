@@ -55,7 +55,7 @@ public class PostController {
 
     @PreAuthorize("hasRole('CREATOR')")
     @PutMapping("/updatePost")
-    public ResponseEntity<?> updatePost(@Valid @RequestBody PostUpdateRequest post){
+    public ResponseEntity<?> updatePost(@Valid @RequestBody PostUpdateRequest post) throws Exception {
         return ResponseEntity.ok(postService.update(post));
     }
 
