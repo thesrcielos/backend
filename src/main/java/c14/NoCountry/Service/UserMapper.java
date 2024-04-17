@@ -18,7 +18,6 @@ public class UserMapper {
                 .email(users.getEmail())
                 .name(users.getName())
                 .lastname(users.getLastname())
-                .password(users.getPassword())
                 .rrs_fb(users.getRrs_fb())
                 .rrs_ig(users.getRrs_ig())
                 .place(users.getPlace())

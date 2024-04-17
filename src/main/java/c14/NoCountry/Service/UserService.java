@@ -3,12 +3,10 @@ package c14.NoCountry.Service;
 import c14.NoCountry.Entity.Role;
 import c14.NoCountry.Entity.Users;
 import c14.NoCountry.Repository.UserRepository;
-import c14.NoCountry.dto.LoginRequestDto;
-import c14.NoCountry.dto.UserAdminRegister;
-import c14.NoCountry.dto.UserCreatorRegister;
-import c14.NoCountry.dto.UserDonorRegister;
+import c14.NoCountry.dto.*;
 import c14.NoCountry.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
+import org.antlr.v4.runtime.Token;
 import org.springframework.mail.MailException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,7 +28,7 @@ public class UserService {
     private final EmailService emailService;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-    public String registerUserDonor(UserDonorRegister userDonor) throws Exception {
+    public TokenResponse registerUserDonor(UserDonorRegister userDonor) throws Exception {
         if (userRepository.existsByEmail(userDonor.getEmail())) {
             throw new Exception("El correo electrónico ya está registrado");
         }
@@ -38,13 +36,13 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Users savedUser = userRepository.save(user);
         sendEmailRegistration(savedUser.getEmail());
-        return jwtService.getToken(savedUser);
+        return TokenResponse.builder().token(jwtService.getToken(savedUser)).build();
     }
 
     public void sendEmailRegistration(String email){
         emailService.sendEmail(email, "Registro Completo", "Registro Realizado Correctamente, Bienvenido");
     }
-    public String registerUserCreator(UserCreatorRegister userCreator) throws Exception {
+    public TokenResponse registerUserCreator(UserCreatorRegister userCreator) throws Exception {
         if (userRepository.existsByEmail(userCreator.getEmail())) {
             throw new Exception("El correo electrónico ya está registrado");
         }
@@ -52,7 +50,7 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Users savedUser = userRepository.save(user);
         sendEmailRegistration(savedUser.getEmail());
-        return jwtService.getToken(user);
+        return TokenResponse.builder().token(jwtService.getToken(user)).build();
     }
     public String registerUserAdmin(UserAdminRegister userAdmin) throws Exception {
         if (userRepository.existsByEmail(userAdmin.getEmail())) {
@@ -64,10 +62,10 @@ public class UserService {
         sendEmailRegistration(savedUser.getEmail());
         return jwtService.getToken(savedUser);
     }
-    public String login(LoginRequestDto loginRequestDto){
+    public TokenResponse login(LoginRequestDto loginRequestDto){
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequestDto.getEmail(),loginRequestDto.getPassword()));
         UserDetails user = userRepository.findByEmail(loginRequestDto.getEmail());
-        return jwtService.getToken(user);
+        return TokenResponse.builder().token(jwtService.getToken(user)).build();
     }
     public List<Users> getAllUsers() {
         return userRepository.findAll();
