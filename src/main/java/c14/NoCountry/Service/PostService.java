@@ -5,11 +5,14 @@ import c14.NoCountry.Repository.PostRepository;
 import c14.NoCountry.dto.PostResponse;
 import c14.NoCountry.dto.PostSavingRequest;
 import c14.NoCountry.dto.PostUpdateRequest;
+import c14.NoCountry.dto.UserResponse;
+import c14.NoCountry.exception.UserException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import c14.NoCountry.Entity.Post;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -44,7 +47,10 @@ public class PostService {
     }
 
     public PostResponse update(PostUpdateRequest postRequest) throws Exception {
-        Users user = userService.getUserById(postRequest.getUser_id()).orElseThrow(()->new Exception("usuario no existe"));
+        Optional<Post> postSaved = postRepository.findById(postRequest.getId());
+        if(postSaved.isEmpty()){
+            throw new Exception("Post not found");
+        }
         Post post = postMapper.postUpdateToPost(postRequest);
         return postMapper.toPostResponse(postRepository.save(post));
     }

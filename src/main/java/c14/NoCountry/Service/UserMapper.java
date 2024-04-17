@@ -14,7 +14,7 @@ public class UserMapper {
         throw new NullPointerException("User cant be null");
     }
         return UserResponse.builder()
-                //.id(post.getId())
+                .id(users.getId())
                 .email(users.getEmail())
                 .name(users.getName())
                 .lastname(users.getLastname())
