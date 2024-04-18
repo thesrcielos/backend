@@ -70,10 +70,8 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable("id") int id, @RequestBody Users user) throws Exception {
-        UserResponse existingUser = userService.getUserById(id);
-        user.setId(id); // asegurarse de que el ID coincida
-        userService.updateUser(user);
+    public ResponseEntity<?> updateUser(@PathVariable("id") int id, @RequestBody UserUpdateResponse user) throws Exception {
+        userService.updateUser(user,id);
         return new ResponseEntity<>("Usuario actualizado correctamente", HttpStatus.OK);
 
     }

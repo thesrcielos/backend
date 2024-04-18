@@ -25,6 +25,19 @@ public class UserMapper {
                 .role(users.getRole())
                 .build();
     }
+    public Users userUpdateToUser(UserUpdateResponse user){
+        if(users==null){
+            throw new NullPointerException("User cant be null");
+        }
+        return Users.builder().
+                .name(users.getName())
+                .lastname(users.getLastname())
+                .rrs_fb(users.getRrs_fb())
+                .rrs_ig(users.getRrs_ig())
+                .place(users.getPlace())
+                .photo(users.getPhoto())
+                .build();
+    }
     public UserUpdateResponse toUserUpdateResponse(Users users){
         if(users==null){
             throw new NullPointerException("User cant be null");

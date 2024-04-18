@@ -84,12 +84,12 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public void updateUser(Users user) throws Exception {
-        Users existingUser = userRepository.findById(user.getId()).orElseThrow(()-> new UserException(UserException.USER_NOT_FOUND));
-        if (!existingUser.getPassword().equals(user.getPassword())) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
-        userRepository.save(user);
+    public void updateUser(UserUpdateResponse user, int id) throws Exception {
+        Users existingUser = userRepository.findById(id).orElseThrow(()-> new UserException(UserException.USER_NOT_FOUND));
+        Users userUpdate = userMapper.userUpdateToUser(user);
+        userUpdate.setPassword(existingUser.getPassword());
+        userUpdate.setEmail(existingUser.getEmail());
+        userRepository.save(userUpdate);
     }
 
     public boolean updatePasswordByEmail(String email, String OldPassword, String newPassword, String confirmPassword) throws Exception {
