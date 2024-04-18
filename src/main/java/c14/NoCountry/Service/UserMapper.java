@@ -22,6 +22,7 @@ public class UserMapper {
                 .rrs_ig(users.getRrs_ig())
                 .place(users.getPlace())
                 .photo(users.getPhoto())
+                .role(users.getRole())
                 .build();
     }
     public UserUpdateResponse toUserUpdateResponse(Users users){
