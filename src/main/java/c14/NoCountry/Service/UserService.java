@@ -87,8 +87,10 @@ public class UserService {
     public void updateUser(UserUpdateResponse user, int id) throws Exception {
         Users existingUser = userRepository.findById(id).orElseThrow(()-> new UserException(UserException.USER_NOT_FOUND));
         Users userUpdate = userMapper.userUpdateToUser(user);
+        userUpdate.setId(id);
         userUpdate.setPassword(existingUser.getPassword());
         userUpdate.setEmail(existingUser.getEmail());
+        userUpdate.setRole(existingUser.getRole());
         userRepository.save(userUpdate);
     }
 

@@ -26,16 +26,16 @@ public class UserMapper {
                 .build();
     }
     public Users userUpdateToUser(UserUpdateResponse user){
-        if(users==null){
+        if(user==null){
             throw new NullPointerException("User cant be null");
         }
-        return Users.builder().
-                .name(users.getName())
-                .lastname(users.getLastname())
-                .rrs_fb(users.getRrs_fb())
-                .rrs_ig(users.getRrs_ig())
-                .place(users.getPlace())
-                .photo(users.getPhoto())
+        return Users.builder()
+                .name(user.getName())
+                .lastname(user.getLastname())
+                .rrs_fb(user.getRrs_fb())
+                .rrs_ig(user.getRrs_ig())
+                .place(user.getPlace())
+                .photo(user.getPhoto())
                 .build();
     }
     public UserUpdateResponse toUserUpdateResponse(Users users){
@@ -43,10 +43,8 @@ public class UserMapper {
             throw new NullPointerException("User cant be null");
         }
         return UserUpdateResponse.builder()
-                .id(users.getId())
                 .name(users.getName())
                 .lastname(users.getLastname())
-                .password(users.getPassword())
                 .rrs_fb(users.getRrs_fb())
                 .rrs_ig(users.getRrs_ig())
                 .place(users.getPlace())
