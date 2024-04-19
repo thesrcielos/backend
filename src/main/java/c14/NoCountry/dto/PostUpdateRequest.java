@@ -2,6 +2,7 @@ package c14.NoCountry.dto;
 
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostUpdateRequest {
-    @NotBlank
+    @NotNull
     private Integer id;
     @NotBlank
     private String name;
@@ -20,6 +21,4 @@ public class PostUpdateRequest {
     private String data;
     @NotBlank
     private String image;
-    @NotBlank
-    private Integer user_id;
 }

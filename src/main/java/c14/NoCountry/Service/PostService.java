@@ -50,12 +50,11 @@ public class PostService {
         return postRepository.searchProjectByData(searchTerm);
     }
 
-    public PostResponse update(PostUpdateRequest postRequest) throws Exception {
-        Optional<Post> postSaved = postRepository.findById(postRequest.getId());
-        if(postSaved.isEmpty()){
-            throw new Exception("Post not found");
-        }
-        Post post = postMapper.postUpdateToPost(postRequest);
+    public PostResponse update(PostUpdateRequest postRequest) throws RequestException {
+        Post post = postRepository.findById(postRequest.getId()).orElseThrow(()->new RequestException("401","Post with that id doesnt exist"));
+        post.setName(postRequest.getName());
+        post.setData(postRequest.getData());
+        post.setImage(postRequest.getImage());
         return postMapper.toPostResponse(postRepository.save(post));
     }
     //Metodos Genericos para el manejo de excepciones:

@@ -21,17 +21,6 @@ public class PostMapper {
                 .build();
     }
 
-    public Post postUpdateToPost(PostUpdateRequest post){
-        if(post==null){
-            throw new NullPointerException("Post cant be null");
-        }
-        return Post.builder()
-                .name(post.getName())
-                .data(post.getData())
-                .image(post.getImage())
-                .build();
-    }
-
     public Post postRequestToPost(PostSavingRequest post){
         if(post==null){
             throw new NullPointerException("Post cant be null");

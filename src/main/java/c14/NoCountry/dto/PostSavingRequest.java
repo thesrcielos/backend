@@ -16,7 +16,6 @@ public class PostSavingRequest {
     private String name;
     @NotBlank
     private String data;
-    @NotBlank
     private String image;
 
 }

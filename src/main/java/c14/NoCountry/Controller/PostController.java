@@ -3,6 +3,7 @@ package c14.NoCountry.Controller;
 import c14.NoCountry.Service.PostService;
 import c14.NoCountry.dto.PostSavingRequest;
 import c14.NoCountry.dto.PostUpdateRequest;
+import c14.NoCountry.exception.RequestException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -60,7 +61,7 @@ public class PostController {
 
     @PreAuthorize("hasAuthority('CREATOR')")
     @PutMapping("/updatePost")
-    public ResponseEntity<?> updatePost(@Valid @RequestBody PostUpdateRequest post) throws Exception {
+    public ResponseEntity<?> updatePost(@Valid @RequestBody PostUpdateRequest post) throws RequestException {
         return ResponseEntity.ok(postService.update(post));
     }
 
