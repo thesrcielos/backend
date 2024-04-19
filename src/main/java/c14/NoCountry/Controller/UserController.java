@@ -26,28 +26,47 @@ public class UserController {
 
     @PostMapping("/registerDonor")
     public ResponseEntity<?> registerUserDonor(@RequestBody UserDonorRegister user) throws Exception {
+
+        userService.validateField(user.getEmail(), "email is empty or null", "P - 401");
+        userService.validateField(user.getPassword(), "password is empty or null", "P - 402");
+        userService.validatePassword(user.getPassword());
+        userService.validateField(user.getName(), "name is empty or null", "P - 403");
+        userService.validateField(user.getLastname(), "last name is empty or null", "P - 404");
         return ResponseEntity.ok(userService.registerUserDonor(user));
     }
 
     @PostMapping("/registerCreator")
     public ResponseEntity<?> registerUserCreator(@RequestBody UserCreatorRegister user) throws Exception {
+        userService.validateField(user.getEmail(), "email is empty or null", "P - 401");
+        userService.validateField(user.getPassword(), "password is empty or null", "P - 402");
+        userService.validatePassword(user.getPassword());
+        userService.validateField(user.getName(), "name is empty or null", "P - 403");
+        //userService.validateField(user.getLastname(), "last name is empty or null", "P - 404");
+        userService.validateField(user.getPlace(), "name is empty or null", "P - 408");
+        userService.validateField(user.getPhoto(), "name is empty or null", "P - 409");
         return ResponseEntity.ok(userService.registerUserCreator(user));
     }
 
     @PostMapping("/registerAdmin")
     public ResponseEntity<?> registerUserAdmin(@RequestBody UserAdminRegister user) throws Exception {
+        userService.validateField(user.getEmail(), "email is empty or null", "P - 401");
+        userService.validateField(user.getPassword(), "password is empty or null", "P - 402");
+        userService.validatePassword(user.getPassword());
+        userService.validateField(user.getName(), "name is empty or null", "P - 403");
         return ResponseEntity.ok(userService.registerUserAdmin(user));
     }
 
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequestDto request) {
+        userService.validateField(request.getEmail(), "email is empty or null", "P - 401");
+        userService.validateField(request.getPassword(), "password is empty or null", "P - 402");
+
         return ResponseEntity.ok(userService.login(request));
     }
 
-
-    @GetMapping("")
     @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/getAll")
     public ResponseEntity<?> getAllUsers() {
         List<UserResponse> userList = userService.getAllUsers();
         return new ResponseEntity<>(userList, HttpStatus.OK);
@@ -78,7 +97,9 @@ public class UserController {
 
     @PutMapping("/updatePassword")
     public ResponseEntity<?> updatePasswordByEmail(@RequestBody UpdatePassword updatePassword) throws Exception {
+        userService.validatePassword(updatePassword.getNewPassword());
         userService.updatePasswordByEmail(updatePassword);
+
         return new ResponseEntity<>("Password was updated successfully",HttpStatus.OK);
 
     }

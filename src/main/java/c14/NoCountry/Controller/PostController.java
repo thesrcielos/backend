@@ -31,7 +31,6 @@ public class PostController {
     @PostMapping("/save-post")
     public ResponseEntity<?> savePost(@Valid @RequestBody PostSavingRequest post, BindingResult result){
 
-
         postService.validateField(post.getName(), "name is empty or null", "P - 403");
         postService.validateField(post.getData(), "data is empty or null", "P - 405");
         postService.validateField(post.getImage(), "image is empty or null", "P - 406");

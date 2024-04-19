@@ -2,11 +2,9 @@ package c14.NoCountry.Controller;
 
 
 import c14.NoCountry.dto.ErrorDTO;
-import c14.NoCountry.exception.RequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.nio.file.AccessDeniedException;
@@ -23,7 +21,7 @@ public class ControllerAdvice {
                 .build();
         return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
-    /*
+
     @ExceptionHandler(value = RuntimeException.class)//Definimos los tipos de excepcion a manejar
     public ResponseEntity<ErrorDTO> runtimeExceptionHandler(RuntimeException ex){
         //Definimos el tipo de error, debemos definir un diccionario de errores
@@ -31,7 +29,7 @@ public class ControllerAdvice {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 
     }
-
+    /*
     @ExceptionHandler(value = RequestException.class)
     public ResponseEntity<ErrorDTO> requestExceptionHandler(RequestException ex){
         //Aca nos trae el tipo de error directamente de java
