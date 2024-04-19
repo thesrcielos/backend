@@ -108,4 +108,14 @@ public class UserController {
         List<UserResponse> searchResult = userService.searchProjectByEmail(searchTerm);
         return ResponseEntity.ok(searchResult);
     }
+    @GetMapping("/getCreators")
+    public ResponseEntity<?> getAllCreators() {
+        List<UserResponse> searchResult = userService.getAllCreators();
+        return ResponseEntity.ok(searchResult);
+    }
+    @GetMapping("/getDonnors")
+    public ResponseEntity<?> getAllDonnors() {
+        List<UserResponse> searchResult = userService.getAllDonnors();
+        return ResponseEntity.ok(searchResult);
+    }
 }

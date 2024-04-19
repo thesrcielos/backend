@@ -116,6 +116,15 @@ public class UserService {
                 .map(userMapper::toUserResponse).toList();
     }
 
+    public List<UserResponse> getAllCreators() {
+        return userRepository.getAllCreator().stream()
+                .map(userMapper::toUserResponse).toList();
+    }
+    public List<UserResponse> getAllDonnors() {
+        return userRepository.getAllDonnor().stream()
+                .map(userMapper::toUserResponse).toList();
+    }
+
     public Users getUserFromSecurityContextHolder(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(!(authentication instanceof UsernamePasswordAuthenticationToken userToken)){

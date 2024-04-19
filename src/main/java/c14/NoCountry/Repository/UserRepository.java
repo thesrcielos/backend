@@ -15,4 +15,10 @@ public interface UserRepository extends JpaRepository<Users, Integer> {
     boolean existsByEmail(String email);
     @Query(value = "SELECT * FROM users WHERE email LIKE %?1%", nativeQuery = true)
     List<Users> searchProjectByEmail(String searchTerm);
+
+    @Query(value = "SELECT * FROM users WHERE role = 1", nativeQuery = true)
+    List<Users> getAllCreator();
+
+    @Query(value = "SELECT * FROM users WHERE role = 2", nativeQuery = true)
+    List<Users> getAllDonnor();
 }
