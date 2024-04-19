@@ -26,7 +26,7 @@ public class PostController {
 //// la anotacion @valid se usa para activar la validacion de entrada para post
 //    el parametro BindingResult lo usamos para manejar las excepciones de validacion
 
-    @PreAuthorize("hasRole('CREATOR')")
+    @PreAuthorize("hasAuthority('CREATOR')")
     @PostMapping("/save-post")
     public ResponseEntity<?> savePost(@Valid @RequestBody PostSavingRequest post, BindingResult result){
 
@@ -41,25 +41,25 @@ public class PostController {
        return ResponseEntity.ok(postService.save(post));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/all-post")
     public ResponseEntity<?> getPosts() {
         return ResponseEntity.ok(postService.findByAll());
     }
 
-    @PreAuthorize("hasRole('CREATOR')")
+    @PreAuthorize("hasAuthority('CREATOR')")
     @GetMapping("/user/{id}")
     public ResponseEntity<?> getPostsByUserId(@PathVariable Integer id){
         return ResponseEntity.ok(postService.findByUserId(id));
     }
 
-    @PreAuthorize("hasRole('CREATOR')")
+    @PreAuthorize("hasAuthority('CREATOR')")
     @PutMapping("/updatePost")
     public ResponseEntity<?> updatePost(@Valid @RequestBody PostUpdateRequest post) throws Exception {
         return ResponseEntity.ok(postService.update(post));
     }
 
-    @PreAuthorize("hasAnyRole('CREATOR','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('CREATOR','ADMIN')")
     @DeleteMapping("deletePost/{id}")
     public ResponseEntity<?> deletePost(@PathVariable Integer id){
         postService.delete(id);
