@@ -25,23 +25,23 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/registerDonor")
-    public ResponseEntity<?> registerUserDonor(@RequestBody @Valid UserDonorRegister user) throws Exception {
+    public ResponseEntity<?> registerUserDonor(@RequestBody UserDonorRegister user) throws Exception {
         return ResponseEntity.ok(userService.registerUserDonor(user));
     }
 
     @PostMapping("/registerCreator")
-    public ResponseEntity<?> registerUserCreator(@RequestBody @Valid UserCreatorRegister user) throws Exception {
+    public ResponseEntity<?> registerUserCreator(@RequestBody UserCreatorRegister user) throws Exception {
         return ResponseEntity.ok(userService.registerUserCreator(user));
     }
 
     @PostMapping("/registerAdmin")
-    public ResponseEntity<?> registerUserAdmin(@RequestBody @Valid UserAdminRegister user) throws Exception {
+    public ResponseEntity<?> registerUserAdmin(@RequestBody UserAdminRegister user) throws Exception {
         return ResponseEntity.ok(userService.registerUserAdmin(user));
     }
 
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody @Valid LoginRequestDto request) {
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequestDto request) {
         return ResponseEntity.ok(userService.login(request));
     }
 
@@ -70,18 +70,18 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable("id") int id, @RequestBody @Valid UserUpdateResponse user) throws Exception {
+    public ResponseEntity<?> updateUser(@PathVariable("id") int id, @RequestBody UserUpdateResponse user) throws Exception {
+        UserResponse existingUser = userService.getUserById(id);
         userService.updateUser(user,id);
         return new ResponseEntity<>("Usuario actualizado correctamente", HttpStatus.OK);
-
     }
 
     @PutMapping("/updatePassword")
-    public ResponseEntity<?> updatePasswordByEmail(@RequestBody @Valid UpdatePassword updatePassword) throws Exception {
+    public ResponseEntity<?> updatePasswordByEmail(@RequestBody UpdatePassword updatePassword) throws Exception {
         userService.updatePasswordByEmail(updatePassword);
-        return new ResponseEntity<>("Password was successfully updated",HttpStatus.OK);
-    }
+        return new ResponseEntity<>("Password was updated successfully",HttpStatus.OK);
 
+    }
     @GetMapping("/searchByEmail")
     public ResponseEntity<?> searchByEmail(@RequestParam("searchTerm") String searchTerm) {
         List<UserResponse> searchResult = userService.searchProjectByEmail(searchTerm);

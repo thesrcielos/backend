@@ -3,6 +3,7 @@ package c14.NoCountry.Service;
 import c14.NoCountry.Entity.Users;
 import c14.NoCountry.Repository.UserRepository;
 import c14.NoCountry.dto.*;
+import c14.NoCountry.exception.RequestException;
 import c14.NoCountry.exception.UserException;
 import c14.NoCountry.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -123,4 +124,31 @@ public class UserService {
         UserDetails userDetails = (UserDetails) userToken.getPrincipal();
         return (Users) userDetails;
     }
+
+    //Metodos Genericos para el manejo de excepciones:
+    //Metodo para campos nulos o vacios
+    public void validateField(String field, String fieldName, String errorCode) {
+        if (field == null || field.isEmpty()) {
+            throw new RequestException(errorCode, fieldName + " is required");
+        }
+    }
+    //Validacion para el password
+    public void validatePassword(String password) {
+        if (password.length() < 8) {
+            throw new RequestException("P-461", "Password must be at least 8 characters long");
+        }
+
+        if (!password.matches(".*[!@#$%^&*()_+=\\[\\]{};':\"\\\\|,.<>\\/?].*")) {
+            throw new RequestException("P-461", "Password must contain at least one special character");
+        }
+
+        if (!password.matches(".*\\d.*")) {
+            throw new RequestException("P-461", "Password must contain at least one digit");
+        }
+
+        if (!password.matches(".*[a-z].*") || !password.matches(".*[A-Z].*")) {
+            throw new RequestException("P-461", "Password must contain at least one uppercase and one lowercase letter");
+        }
+    }
+
 }

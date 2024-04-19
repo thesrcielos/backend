@@ -30,6 +30,11 @@ public class PostController {
     @PostMapping("/save-post")
     public ResponseEntity<?> savePost(@Valid @RequestBody PostSavingRequest post, BindingResult result){
 
+
+        postService.validateField(post.getName(), "name is empty or null", "P - 403");
+        postService.validateField(post.getData(), "data is empty or null", "P - 405");
+        postService.validateField(post.getImage(), "image is empty or null", "P - 406");
+
         if (result.hasErrors()) {
             List<String> errorMessages = result.getAllErrors()
                     .stream()
@@ -68,14 +73,14 @@ public class PostController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/searchByName")
-    public ResponseEntity<?> searchByName(@RequestParam("searchTerm") String searchTerm) {
+    public ResponseEntity<?> searchByName(@RequestParam("searchName") String searchTerm) {
         List<Post> searchResult = postService.searchProjectByName(searchTerm);
         return ResponseEntity.ok(searchResult);
     }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/searchByData")
-    public ResponseEntity<?> searchByData(@RequestParam("searchTerm") String searchTerm) {
+    public ResponseEntity<?> searchByData(@RequestParam("searchData") String searchTerm) {
         List<Post> searchResult = postService.searchProjectByData(searchTerm);
         return ResponseEntity.ok(searchResult);
     }
