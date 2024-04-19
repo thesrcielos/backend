@@ -11,6 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -92,26 +93,21 @@ public class UserService {
         userRepository.save(existingUser);
     }
 
-    public boolean updatePasswordByEmail(String email, String OldPassword, String newPassword, String confirmPassword) throws Exception {
-        Users user = userRepository.findByEmail(email);
+    public void updatePasswordByEmail(UpdatePassword updatePassword) throws Exception {
+        Users user = userRepository.findByEmail(updatePassword.getEmail());
         if (user == null) {
             throw new Exception("El usuario con el correo electrónico especificado no existe.");
         }
-        if (!passwordMatches(OldPassword, user.getPassword())) {
+        if (!passwordMatches(updatePassword.getOldPassword(), user.getPassword())) {
             throw new Exception("Contraseña no coincide, por favor intente de nuevo");
         }
-        if (!newPassword.equals(confirmPassword)) {
-            throw new Exception("Las contraseñas no coinciden.");
-        }
-        String encryptedPassword = passwordEncoder.encode(newPassword);
+        String encryptedPassword = passwordEncoder.encode(updatePassword.getNewPassword());
         user.setPassword(encryptedPassword);
         userRepository.save(user);
-        return true;
     }
 
     private boolean passwordMatches(String oldPassword, String password) {
-        String encodedPassword = passwordEncoder.encode(oldPassword);
-        return encodedPassword.equals(password);
+        return BCrypt.checkpw(oldPassword,password);
     }
 
     public List<UserResponse> searchProjectByEmail(String searchTerm) {

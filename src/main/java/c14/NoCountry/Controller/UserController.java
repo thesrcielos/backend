@@ -77,20 +77,11 @@ public class UserController {
     }
 
     @PutMapping("/updatePassword")
-    public ResponseEntity<String> updatePasswordByEmail(@RequestParam String email,@RequestParam String OldPassword,
-                                                        @RequestParam String newPassword,
-                                                        @RequestParam String confirmPassword) {
-        try {
-            boolean passwordUpdated = userService.updatePasswordByEmail(email,OldPassword, newPassword, confirmPassword);
-            if (passwordUpdated) {
-                return ResponseEntity.ok("¡La contraseña se ha actualizado correctamente!");
-            } else {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("La contraseña no se pudo actualizar.");
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al actualizar la contraseña: " + e.getMessage());
-        }
+    public ResponseEntity<?> updatePasswordByEmail(@RequestBody @Valid UpdatePassword updatePassword) throws Exception {
+        userService.updatePasswordByEmail(updatePassword);
+        return new ResponseEntity<>("Password was successfully updated",HttpStatus.OK);
     }
+
     @GetMapping("/searchByEmail")
     public ResponseEntity<?> searchByEmail(@RequestParam("searchTerm") String searchTerm) {
         List<UserResponse> searchResult = userService.searchProjectByEmail(searchTerm);
