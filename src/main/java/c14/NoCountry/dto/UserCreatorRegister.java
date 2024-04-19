@@ -20,15 +20,12 @@ public class UserCreatorRegister {
     private String email;
     @NotBlank
     private String name;
+    private String lastname;
     @NotBlank
     @Size(min = 8)
     private String password;
-    @NotBlank
     private String rrs_fb;
-    @NotBlank
     private String rrs_ig;
-    @NotBlank
     private String place;
-    @NotBlank
     private String photo;
 }

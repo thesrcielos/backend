@@ -1,6 +1,5 @@
 package c14.NoCountry.Service;
 
-import c14.NoCountry.Entity.Role;
 import c14.NoCountry.Entity.Users;
 import c14.NoCountry.Repository.UserRepository;
 import c14.NoCountry.dto.*;
@@ -8,13 +7,12 @@ import c14.NoCountry.exception.RequestException;
 import c14.NoCountry.exception.UserException;
 import c14.NoCountry.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
-import org.antlr.v4.runtime.Token;
-import org.springframework.mail.MailException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -85,34 +83,32 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public void updateUser(Users user) throws Exception {
-        Users existingUser = userRepository.findById(user.getId()).orElseThrow(()-> new UserException(UserException.USER_NOT_FOUND));
-        if (!existingUser.getPassword().equals(user.getPassword())) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
-        userRepository.save(user);
+    public void updateUser(UserUpdateResponse user, int id) throws Exception {
+        Users existingUser = userRepository.findById(id).orElseThrow(()-> new UserException(UserException.USER_NOT_FOUND));
+        existingUser.setName(user.getName());
+        existingUser.setLastname(user.getLastname());
+        existingUser.setRrs_fb(user.getRrs_fb());
+        existingUser.setRrs_ig(user.getRrs_ig());
+        existingUser.setPlace(user.getPlace());
+        existingUser.setPhoto(user.getPhoto());
+        userRepository.save(existingUser);
     }
 
-    public boolean updatePasswordByEmail(String email, String OldPassword, String newPassword, String confirmPassword) throws Exception {
-        Users user = userRepository.findByEmail(email);
+    public void updatePasswordByEmail(UpdatePassword updatePassword) throws Exception {
+        Users user = userRepository.findByEmail(updatePassword.getEmail());
         if (user == null) {
             throw new Exception("El usuario con el correo electrónico especificado no existe.");
         }
-        if (!passwordMatches(OldPassword, user.getPassword())) {
+        if (!passwordMatches(updatePassword.getOldPassword(), user.getPassword())) {
             throw new Exception("Contraseña no coincide, por favor intente de nuevo");
         }
-        if (!newPassword.equals(confirmPassword)) {
-            throw new Exception("Las contraseñas no coinciden.");
-        }
-        String encryptedPassword = passwordEncoder.encode(newPassword);
+        String encryptedPassword = passwordEncoder.encode(updatePassword.getNewPassword());
         user.setPassword(encryptedPassword);
         userRepository.save(user);
-        return true;
     }
 
     private boolean passwordMatches(String oldPassword, String password) {
-        String encodedPassword = passwordEncoder.encode(oldPassword);
-        return encodedPassword.equals(password);
+        return BCrypt.checkpw(oldPassword,password);
     }
 
     public List<UserResponse> searchProjectByEmail(String searchTerm) {

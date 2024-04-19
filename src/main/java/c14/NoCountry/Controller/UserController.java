@@ -4,7 +4,6 @@ import c14.NoCountry.Entity.Post;
 import c14.NoCountry.Entity.Users;
 import c14.NoCountry.Service.UserService;
 import c14.NoCountry.dto.*;
-import c14.NoCountry.exception.RequestException;
 import c14.NoCountry.exception.UserException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,47 +26,22 @@ public class UserController {
 
     @PostMapping("/registerDonor")
     public ResponseEntity<?> registerUserDonor(@RequestBody UserDonorRegister user) throws Exception {
-        /*
-        if(user.getEmail().equals("")|| user.getEmail() == null){
-            //throw new RuntimeException("Email is invalid");
-            throw new RequestException("P-401","Email is required");
-        }
-        if(user.getLastname().equals("")|| user.getLastname() == null){
-            //throw new RuntimeException("Email is invalid");
-            throw new RequestException("P-403","Last name is required");
-        }*/
-        userService.validateField(user.getEmail(), "email is empty or null", "P - 401");
-        userService.validateField(user.getPassword(), "password is empty or null", "P - 402");
-        userService.validateField(user.getName(), "name is empty or null", "P - 403");
-        userService.validateField(user.getLastname(), "last name is empty or null", "P - 404");
         return ResponseEntity.ok(userService.registerUserDonor(user));
     }
 
     @PostMapping("/registerCreator")
     public ResponseEntity<?> registerUserCreator(@RequestBody UserCreatorRegister user) throws Exception {
-        userService.validateField(user.getEmail(), "email is empty or null", "P - 401");
-        userService.validateField(user.getPassword(), "password is empty or null", "P - 402");
-        userService.validateField(user.getName(), "name is empty or null", "P - 403");
-        userService.validateField(user.getPlace(), "place is empty or null", "P - 408");
-        userService.validateField(user.getPhoto(), "photo is empty or null", "P - 409");
-
-        //userService.validateField(user.getLastname(), "last name is empty or null", "P - 404");
         return ResponseEntity.ok(userService.registerUserCreator(user));
     }
 
     @PostMapping("/registerAdmin")
     public ResponseEntity<?> registerUserAdmin(@RequestBody UserAdminRegister user) throws Exception {
-        userService.validateField(user.getEmail(), "email is empty or null", "P - 401");
-        userService.validateField(user.getPassword(), "password is empty or null", "P - 402");
-        userService.validateField(user.getName(), "name is empty or null", "P - 403");
         return ResponseEntity.ok(userService.registerUserAdmin(user));
     }
 
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequestDto request) {
-        userService.validateField(request.getEmail(), "email is empty or null", "P - 401");
-        userService.validatePassword(request.getPassword());
         return ResponseEntity.ok(userService.login(request));
     }
 
@@ -101,6 +75,7 @@ public class UserController {
         user.setId(id); // asegurarse de que el ID coincida
         userService.updateUser(user);
         return new ResponseEntity<>("Usuario actualizado correctamente", HttpStatus.OK);
+
     }
 
     @PutMapping("/updatePassword")
@@ -108,7 +83,6 @@ public class UserController {
                                                         @RequestParam String newPassword,
                                                         @RequestParam String confirmPassword) {
         try {
-            userService.validatePassword(newPassword);
             boolean passwordUpdated = userService.updatePasswordByEmail(email,OldPassword, newPassword, confirmPassword);
             if (passwordUpdated) {
                 return ResponseEntity.ok("¡La contraseña se ha actualizado correctamente!");
@@ -120,7 +94,7 @@ public class UserController {
         }
     }
     @GetMapping("/searchByEmail")
-    public ResponseEntity<?> searchByEmail(@RequestParam("searchEmail") String searchTerm) {
+    public ResponseEntity<?> searchByEmail(@RequestParam("searchTerm") String searchTerm) {
         List<UserResponse> searchResult = userService.searchProjectByEmail(searchTerm);
         return ResponseEntity.ok(searchResult);
     }
