@@ -19,7 +19,6 @@ public class UserDonorRegister {
     private String email;
     @NotBlank
     private String name;
-    @NotBlank
     private String lastname;
     @NotBlank
     @Size(min = 8)
