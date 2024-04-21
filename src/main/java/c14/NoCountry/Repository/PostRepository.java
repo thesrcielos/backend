@@ -8,7 +8,6 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post, Integer> {
 
     List<Post> findByUser_Id(Integer id);
-    List<Post> findByPost_id(Integer id);
 
     @Query(value = "SELECT * FROM posts WHERE name LIKE %?1%", nativeQuery = true)
     List<Post> searchProjectByName(String searchTerm);
