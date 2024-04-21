@@ -42,6 +42,9 @@ public class PostService {
     public List<PostResponse> findByUserId(Integer id){
         return postRepository.findByUser_Id(id).stream().map(postMapper::toPostResponse).toList();
     }
+    public List<PostResponse> findByPostId(Integer id){
+        return postRepository.findByPost_id(id).stream().map(postMapper::toPostResponse).toList();
+    }
     public List<Post> searchProjectByName(String searchTerm) {
         return postRepository.searchProjectByData(searchTerm);
     }

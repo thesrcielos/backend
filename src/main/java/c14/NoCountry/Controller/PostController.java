@@ -46,7 +46,7 @@ public class PostController {
        return ResponseEntity.ok(postService.save(post));
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/all-post")
     public ResponseEntity<?> getPosts() {
         return ResponseEntity.ok(postService.findByAll());
@@ -59,13 +59,19 @@ public class PostController {
     }
 
     @PreAuthorize("hasAuthority('CREATOR')")
+    @GetMapping("/post_id/{id}")
+    public ResponseEntity<?> getPostsByPostId(@PathVariable Integer id){
+        return ResponseEntity.ok(postService.findByPostId(id));
+    }
+
+    @PreAuthorize("hasAuthority('CREATOR')")
     @PutMapping("/updatePost")
     public ResponseEntity<?> updatePost(@Valid @RequestBody PostUpdateRequest post) throws RequestException {
         return ResponseEntity.ok(postService.update(post));
     }
 
     @PreAuthorize("hasAnyAuthority('CREATOR','ADMIN')")
-    @DeleteMapping("deletePost/{id}")
+    @DeleteMapping("/deletePost/{id}")
     public ResponseEntity<?> deletePost(@PathVariable Integer id){
         postService.delete(id);
         return ResponseEntity.ok(HttpStatus.OK);
