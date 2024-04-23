@@ -1,4 +1,4 @@
-package c14.NoCountry.dto;
+package c14.NoCountry.dto.user;
 
 import c14.NoCountry.Entity.Role;
 import jakarta.validation.constraints.Email;
@@ -13,9 +13,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDonorRegister {
+public class UserCreatorRegister {
     @NotBlank
     @Email(message = "El correo electronico no es valido")
+    @NotBlank
     private String email;
     @NotBlank
     private String name;
@@ -23,5 +24,8 @@ public class UserDonorRegister {
     @NotBlank
     @Size(min = 8)
     private String password;
-
+    private String rrs_fb;
+    private String rrs_ig;
+    private String place;
+    private String photo;
 }

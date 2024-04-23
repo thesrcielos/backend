@@ -1,4 +1,4 @@
-package c14.NoCountry.dto;
+package c14.NoCountry.dto.post;
 
 
 import jakarta.validation.constraints.NotBlank;

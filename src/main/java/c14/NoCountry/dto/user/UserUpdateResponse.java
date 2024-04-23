@@ -1,4 +1,4 @@
-package c14.NoCountry.dto;
+package c14.NoCountry.dto.user;
 
 
 import c14.NoCountry.Entity.Role;

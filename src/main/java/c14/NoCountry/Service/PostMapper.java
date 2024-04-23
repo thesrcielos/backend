@@ -1,9 +1,8 @@
 package c14.NoCountry.Service;
 
 import c14.NoCountry.Entity.Post;
-import c14.NoCountry.dto.PostResponse;
-import c14.NoCountry.dto.PostSavingRequest;
-import c14.NoCountry.dto.PostUpdateRequest;
+import c14.NoCountry.dto.post.PostResponse;
+import c14.NoCountry.dto.post.PostSavingRequest;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,7 +1,6 @@
-package c14.NoCountry.dto;
+package c14.NoCountry.dto.post;
 
 
-import c14.NoCountry.Entity.Users;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -13,10 +12,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostResponse {
+public class PostUpdateRequest {
+    @NotNull
     private Integer id;
+    @NotBlank
     private String name;
+    @NotBlank
     private String data;
+    @NotBlank
     private String image;
-    private Integer user_id;
 }

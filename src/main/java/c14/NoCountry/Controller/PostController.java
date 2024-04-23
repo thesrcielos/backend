@@ -1,8 +1,8 @@
 package c14.NoCountry.Controller;
 
 import c14.NoCountry.Service.PostService;
-import c14.NoCountry.dto.PostSavingRequest;
-import c14.NoCountry.dto.PostUpdateRequest;
+import c14.NoCountry.dto.post.PostSavingRequest;
+import c14.NoCountry.dto.post.PostUpdateRequest;
 import c14.NoCountry.exception.RequestException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
