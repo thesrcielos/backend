@@ -22,6 +22,6 @@ public class Donations {
     private Post post;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    public Users users;
+    public Users user;
     public BigDecimal amount;
 }

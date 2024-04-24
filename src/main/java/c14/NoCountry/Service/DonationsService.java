@@ -6,9 +6,7 @@ import c14.NoCountry.Entity.Users;
 import c14.NoCountry.Repository.DonationsRepository;
 import c14.NoCountry.dto.donations.DonationResponse;
 import c14.NoCountry.dto.donations.DonationSavingRequest;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,7 +24,7 @@ public class DonationsService {
         System.out.println("el id que llega al service es : " + id);
         Donations donations = donationsMapper.donationsRequestToDonation(donationSavingRequest);
         Users user = userService.getUserFromSecurityContextHolder();
-        donations.setUsers(user);
+        donations.setUser(user);
         Post post = postService.getPostById(id);
         donations.setPost(post);
 
@@ -36,5 +34,8 @@ public class DonationsService {
     public List<Donations> findByAll(){
         return donationsRepository.findAll();
 
+    }
+    public List<DonationResponse> findByUserId(Integer id){
+        return donationsRepository.findByUser_Id(id).stream().map(donationsMapper::toDonationResponse).toList();
     }
 }

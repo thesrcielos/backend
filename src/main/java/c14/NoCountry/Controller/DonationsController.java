@@ -1,6 +1,7 @@
 package c14.NoCountry.Controller;
 
 import c14.NoCountry.Service.DonationsService;
+import c14.NoCountry.dto.donations.DonationResponse;
 import c14.NoCountry.dto.donations.DonationSavingRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 @CrossOrigin
 public class DonationsController {
     @Autowired
-    private DonationsService donationsService;
+    private final DonationsService donationsService;
     @PostMapping("/save-donation")
     public ResponseEntity<?> saveDonation(@Valid @RequestBody DonationSavingRequest donations,
                                           BindingResult result){
@@ -38,4 +39,8 @@ public class DonationsController {
         return ResponseEntity.ok(donationsService.findByAll());
     }
 
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> getDonationsByUserId(@PathVariable Integer id){
+        return ResponseEntity.ok(donationsService.findByUserId(id));
+    }
 }

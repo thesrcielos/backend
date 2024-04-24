@@ -13,7 +13,7 @@ public class DonationsMapper {
         }
             return DonationResponse.builder()
                     .id(donations.getId())
-                    .user_id(donations.getUsers().getId())
+                    .user_id(donations.getUser().getId())
                     .post_id(donations.getPost().getId())
                     .amount(donations.getAmount())
                     .build();

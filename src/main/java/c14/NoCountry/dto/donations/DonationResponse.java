@@ -1,8 +1,5 @@
 package c14.NoCountry.dto.donations;
 
-import c14.NoCountry.Entity.Post;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
