@@ -30,6 +30,8 @@ public class SecurityConfig {
                         auth->
                                 auth.requestMatchers(HttpMethod.POST,"/user/registerDonor","/user/registerCreator","/user/registerAdmin","/user/login")
                                         .permitAll()
+                                        .requestMatchers(HttpMethod.GET,"/post/all-post")
+                                        .permitAll()
                                         .anyRequest().authenticated()
                 ).sessionManagement(sessionManager ->
                         sessionManager.sessionCreationPolicy(
